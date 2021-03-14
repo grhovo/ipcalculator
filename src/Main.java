@@ -23,7 +23,29 @@ public class Main {
         for (int i = 0; i < 4; i++) {
             System.out.println(subnetOctet[i]);
         }
+        ipClass classNetwork = classDefinition(ipaddressoctets[0]);
+        System.out.println("Class for this ip: " + classNetwork.getClassWord());
+        System.out.println(classNetwork.print());
+    }
 
+    public static ipClass classDefinition(int ipaddressoctet) {
+        ipClass classNetwork;
+        if(ipaddressoctet < 128){
+            classNetwork = new ipClassA();
+        }
+        else if(ipaddressoctet < 192){
+            classNetwork = new ipClassB();
+        }
+        else if (ipaddressoctet < 224){
+            classNetwork = new ipClassC();
+        }
+        else if(ipaddressoctet < 240){
+            classNetwork = new ipClassD();
+        }
+        else {
+            classNetwork = new ipClassE();
+        }
+        return classNetwork;
     }
 
     public static int[] convertMaskToOctets(int mask){
