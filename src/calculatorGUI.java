@@ -29,25 +29,35 @@ public class calculatorGUI {
                 // ip address definition in array
                 int[] ipaddressoctets = new int[4];
                 // mask in integer
-                int mask;
+                int mask = 0;
                 // define variables
-                ipaddressoctets[0] = Integer.parseInt(ipaddr_1.getText());
-                ipaddressoctets[1] = Integer.parseInt(ipaddr_2.getText());
-                ipaddressoctets[2] = Integer.parseInt(ipaddr_3.getText());
-                ipaddressoctets[3] = Integer.parseInt(ipaddr_4.getText());
-                //TODO add error writer if there is issue with tiped ip
-                //while (ipaddressoctets[i] > 255 || ipaddressoctets[i] < 0) {
-                //    System.out.println("Please give correct number for octet");
-                //    ipaddressoctets[i] = scanner.nextInt();
-                //}
-                mask = Integer.parseInt(Mask.getText());
-                //TODO check mask size
-                /*
-                while (mask > 32 || mask < 0){
-                    System.out.println("Please give correct number for subnet mask");
-                    mask = scanner.nextInt();
+                boolean EverithingOk=false;
+                while(!EverithingOk) {
+                    ipaddressoctets[0] = Integer.parseInt(ipaddr_1.getText());
+                    ipaddressoctets[1] = Integer.parseInt(ipaddr_2.getText());
+                    ipaddressoctets[2] = Integer.parseInt(ipaddr_3.getText());
+                    ipaddressoctets[3] = Integer.parseInt(ipaddr_4.getText());
+                    for (int i = 0; i < 4; i++) {
+                        if (ipaddressoctets[i] > 255 || ipaddressoctets[i] < 0) {
+                            JOptionPane.showMessageDialog(null, "Please give correct number for octet","Output",JOptionPane.PLAIN_MESSAGE);
+                            ipaddr_1.setText("");
+                            ipaddr_2.setText("");
+                            ipaddr_3.setText("");
+                            ipaddr_4.setText("");
+                            break;
+                        }
+                        EverithingOk=true;
+                    }
                 }
-                */
+                EverithingOk=false;
+                while (!EverithingOk) {
+                    mask = Integer.parseInt(Mask.getText());
+                    if (mask > 32 || mask < 0) {
+                        JOptionPane.showMessageDialog(null, "Please give correct number for subnet mask","Output",JOptionPane.PLAIN_MESSAGE);
+                        Mask.setText("");
+                    }
+                    else EverithingOk=true;
+                }
                 //Subnet calculator class definition
                 subnetCalculator calculator = new subnetCalculator(ipaddressoctets,mask);
                 //Integer mask to x.x.x.x form, where x is integer
@@ -84,6 +94,26 @@ public class calculatorGUI {
                     lastIPStr += lastIP[i] + ".";
                 }
                 last_ip.setText(lastIPStr);
+            }
+        });
+        delete.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ipaddr_1.setText("");
+                ipaddr_2.setText("");
+                ipaddr_3.setText("");
+                ipaddr_4.setText("");
+                Mask.setText("");
+                mask_1.setText("");
+                mask_2.setText("");
+                mask_3.setText("");
+                mask_4.setText("");
+                info.setText("");
+                network.setText("");
+                first_ip.setText("");
+                last_ip.setText("");
+                broadcast.setText("");
+                ipclass.setText("");
             }
         });
     }
