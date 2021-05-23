@@ -85,8 +85,6 @@ public class subnetCalculator {
         else if(mask <= 16){
             broadcast[0] = networkIP[0];
             broadcast[1] = networkIP[1] + ((int) Math.pow(2,16-mask) )- 1;
-            System.out.println(broadcast[1]);
-            System.out.println(mask);
             broadcast[2] = 255;
             broadcast[3] = 255;
         }

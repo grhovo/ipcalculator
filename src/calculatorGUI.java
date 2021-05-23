@@ -119,7 +119,7 @@ public class calculatorGUI {
     }
 
     public static void main(String[] args) {
-        JFrame frame = new JFrame("Calculator");
+        JFrame frame = new JFrame("IPCalculator");
         frame.setContentPane(new calculatorGUI().JPanel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
